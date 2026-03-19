@@ -1,0 +1,1 @@
+ALTER TABLE "channels" ALTER COLUMN "app_id" DROP DEFAULT;
