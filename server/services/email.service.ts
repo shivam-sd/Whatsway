@@ -18,6 +18,7 @@ if (config) {
       user: config.user,
       pass: config.password,
     },
+    connectionTimeout: 20000
   });
 } else {
   console.warn("Using fallback SMTP settings (emails will not be sent)");
