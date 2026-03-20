@@ -93,12 +93,46 @@ export const getSMTPConfigHandler = async (req: Request, res: Response) => {
 
 
 export const getSMTPConfig = async () => {
-  const configs = await db.select().from(smtpConfig).limit(1);
- if (!configs || configs.length === 0) {
-  console.warn('⚠️ No SMTP configuration found');
-  return null;
-}
-return configs[0];
+  try {
+    const configs = await db.select().from(smtpConfig).limit(1);
+
+    // 1️⃣ If database config exists
+    if (configs && configs.length > 0) {
+      console.info("✅ SMTP configuration loaded from DATABASE");
+
+      return {
+        host: configs[0].host,
+        port: configs[0].port,
+        secure: configs[0].secure,
+        user: configs[0].user,
+        password: configs[0].password,
+        fromName: configs[0].fromName,
+        fromEmail: configs[0].fromEmail,
+      };
+    }
+
+    // 2️⃣ Fallback to ENV
+    if (process.env.SMTP_HOST) {
+      console.warn("⚠️ No SMTP config in DB. Using ENV configuration");
+
+      return {
+        host: process.env.SMTP_HOST,
+        port: Number(process.env.SMTP_PORT),
+        secure: false,
+        user: process.env.SMTP_USER,
+        password: process.env.SMTP_PASS,
+        fromName: "Whatsway",
+        fromEmail: process.env.SMTP_USER,
+      };
+    }
+
+    console.warn("❌ No SMTP configuration found anywhere");
+    return null;
+
+  } catch (error) {
+    console.error("SMTP Config error:", error);
+    return null;
+  }
 };
 
 
