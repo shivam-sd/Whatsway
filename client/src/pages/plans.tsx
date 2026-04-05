@@ -110,7 +110,7 @@ export default function Plans() {
 
   const currencySymbolMap: Record<string, string> = {
     USD: "$",
-    INR: "₹",
+    INR: "",
     EUR: "€",
     GBP: "£",
     AED: "د.إ",
@@ -737,7 +737,7 @@ export default function Plans() {
                         {t("plans.form.monthlyPrice")} ({currencySymbol})
                       </label>
                       <input
-                        type="number"
+                        type="text"
                         step="0.01"
                         value={formData.monthlyPrice}
                         onChange={(e) =>
@@ -756,7 +756,7 @@ export default function Plans() {
                         {t("plans.form.annualPrice")} ({currencySymbol})
                       </label>
                       <input
-                        type="number"
+                        type="text"
                         step="0.01"
                         value={formData.annualPrice}
                         onChange={(e) =>

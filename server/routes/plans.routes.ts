@@ -36,7 +36,7 @@ export function registerPlansRoutes(app: Express) {
   app.post("/api/admin/plans", requireAuth, requireRole("superadmin"), createPlan);
 
   app.put("/api/admin/plans/:id", requireAuth, requireRole("superadmin"), updatePlan);
-
+ 
   app.delete("/api/admin/plans/:id", requireAuth, requireRole("superadmin"), deletePlan);
 
   app.post("/api/admin/plans/:id/sync-gateway", requireAuth, requireRole("superadmin"), syncPlanToGateway);

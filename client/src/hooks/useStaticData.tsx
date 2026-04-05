@@ -85,14 +85,14 @@ const useStaticData = () => {
           image:
             "https://images.pexels.com/photos/4386466/pexels-photo-4386466.jpeg?auto=compress&cs=tinysrgb&w=300&h=200&fit=crop",
         },
-        {
-          title: t("Landing.header.aboutMenuItems.2.title"),
-          path: "/careers",
-          description: t("Landing.header.aboutMenuItems.2.description"),
-          icon: Briefcase,
-          image:
-            "https://images.pexels.com/photos/1181675/pexels-photo-1181675.jpeg?auto=compress&cs=tinysrgb&w=300&h=200&fit=crop",
-        },
+        // {
+        //   title: t("Landing.header.aboutMenuItems.2.title"),
+        //   path: "/careers",
+        //   description: t("Landing.header.aboutMenuItems.2.description"),
+        //   icon: Briefcase,
+        //   image:
+        //     "https://images.pexels.com/photos/1181675/pexels-photo-1181675.jpeg?auto=compress&cs=tinysrgb&w=300&h=200&fit=crop",
+        // },
         // {
         //   title: t("Landing.header.aboutMenuItems.3.title"),
         //   path: "/integrations",

@@ -36,11 +36,11 @@ export function registerWhatsappConfigRoutes(
     requireAuth,
     getMyWhatsappConfig
   );
-
+ 
   // Create / Update (superadmin only)
   app.post(
     "/api/embedded/config",
-    requireAuth,
+    requireAuth, 
     requireRole("superadmin"),
     saveWhatsappConfig
   );

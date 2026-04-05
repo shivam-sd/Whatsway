@@ -124,7 +124,7 @@ export function ChannelSettings() {
       return json.data ?? [];
     },
   });
-
+ 
   const { data: config } = useQuery({
     queryKey: ["/api/embedded/config"],
     queryFn: async () => {
@@ -412,7 +412,7 @@ export function ChannelSettings() {
         title: "Facebook SDK not ready",
         description: "Please refresh the page and try again",
         variant: "destructive",
-      });
+      });  
       return;
     }
 

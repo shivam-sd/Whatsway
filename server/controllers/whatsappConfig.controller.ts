@@ -17,7 +17,7 @@
 
 import { Request, Response } from "express";
 import { DiployError, asyncHandler as _dHandler, diployLogger, HTTP_STATUS } from "@diploy/core";
-import { asyncHandler } from "../middlewares/error.middleware";
+import { asyncHandler } from "../middlewares/error.middleware"; 
 import { db } from "../db";
 import {
   whatsappBusinessAccountsConfig,

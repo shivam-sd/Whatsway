@@ -387,11 +387,11 @@ export const messages = pgTable(
     updatedAt: timestamp("updated_at").defaultNow(),
   },
   (table) => ({
-    messageConversationIdx: index("messages_conversation_idx").on(
+    messageConversationIdx: index("messages_conversation_idx").on( 
       table.conversationId
     ),
     messageWhatsappIdx: index("messages_whatsapp_idx").on(
-      table.whatsappMessageId
+      table.whatsappMessageId   
     ),
     messageDirectionIdx: index("messages_direction_idx").on(table.direction),
     messageStatusIdx: index("messages_status_idx").on(table.status),
@@ -548,24 +548,20 @@ export const knowledgeArticles = pgTable(
 
 //plans
 export const plans = pgTable("plans", {
-  id: varchar("id")
+  id: varchar("id", { length: 255 })
     .primaryKey()
     .default(sql`gen_random_uuid()`),
-  name: varchar("name").notNull(),
+  name: varchar("name", { length: 255 }).notNull(),
   description: text("description"),
-  icon: varchar("icon"), // optional: store icon name like 'Zap', 'Crown'
+  icon: varchar("icon", { length: 255 }), // optional: store icon name like 'Zap', 'Crown'
   popular: boolean("popular").default(false),
   badge: varchar("badge"),
   color: varchar("color"),
   buttonColor: varchar("button_color"),
 
   // Pricing
-  monthlyPrice: numeric("monthly_price", { precision: 10, scale: 2 }).default(
-    "0"
-  ),
-  annualPrice: numeric("annual_price", { precision: 10, scale: 2 }).default(
-    "0"
-  ),
+monthlyPrice: text("monthly_price").default("0"),
+annualPrice: text("annual_price").default("0"),
 
   // Permissions (JSON for flexibility)
   permissions: jsonb("permissions").$type<{
@@ -575,7 +571,7 @@ export const plans = pgTable("plans", {
     campaign?: string;
     apiRequestsPerMonth?: string;
     apiRateLimitPerMinute?: string;
-  }>(),
+  }>(), 
 
   // Features (Array of objects)
   features: jsonb("features").$type<{ name: string; included: boolean }[]>(),

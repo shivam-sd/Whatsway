@@ -94,24 +94,53 @@ export const createPlan = async (req: Request, res: Response) => {
 export const updatePlan = async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
-    const updateData = req.body;
+
+    const {
+      name,
+      description,
+      icon,
+      popular,
+      badge,
+      color,
+      buttonColor,
+      monthlyPrice,
+      annualPrice,
+      permissions,
+      features
+    } = req.body;
 
     const updatedPlan = await db
       .update(plans)
-      .set({ ...updateData, updatedAt: new Date() })
+      .set({
+        name,
+        description,
+        icon,
+        popular,
+        badge,
+        color,
+        buttonColor,
+        monthlyPrice: String(monthlyPrice),
+        annualPrice: String(annualPrice),
+        permissions,
+        features,
+        updatedAt: new Date(),
+      })
       .where(eq(plans.id, id))
       .returning();
 
-    if (updatedPlan.length === 0) {
-      return res.status(404).json({ success: false, message: 'Plan not found' });
-    }
+    res.status(200).json({
+      success: true,
+      data: updatedPlan[0],
+    });
 
-    await cacheInvalidate(CACHE_KEYS.subscriptionPlans());
-    await cacheInvalidate(CACHE_KEYS.planById(id));
-
-    res.status(200).json({ success: true, data: updatedPlan[0] });
   } catch (error) {
-    res.status(500).json({ success: false, message: 'Error updating plan', error });
+    console.error("UPDATE PLAN ERROR:", error);
+
+    res.status(500).json({
+      success: false,
+      message: "Error updating plan",
+      error,
+    });
   }
 };
 
