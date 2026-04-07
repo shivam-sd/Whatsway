@@ -230,16 +230,18 @@ const Pricing = () => {
                     {activeCurrencySymbol}
                     {isAnnual ? plan.annualPrice : plan.monthlyPrice}
                   </span>
-                  <span className="text-gray-600 ml-2">
-                    /
-                    {isAnnual
-                      ? t("Landing.pricingSec.pricing.year")
-                      : t("Landing.pricingSec.pricing.month")}
-                  </span>
+                 {(isAnnual ? plan.annualPrice : plan.monthlyPrice) !== "Custom" && (isAnnual ? plan.annualPrice : plan.monthlyPrice) !== "0" && (
+  <span className="text-gray-600 ml-2">
+    /
+    {isAnnual
+      ? `${t("Landing.pricingSec.pricing.year")}+taxes`
+      : `${t("Landing.pricingSec.pricing.month")}+taxes`}
+  </span>
+)}
                 </div>
 
                 {/* Permissions */}
-                {plan.permissions && (
+                {/* {plan.permissions && (
                   <div className="space-y-1">
                     <div className="text-gray-600 text-sm">
                       {t("Landing.pricingSec.pricing.upTo")}{" "}
@@ -257,7 +259,7 @@ const Pricing = () => {
                       </div>
                     )}
                   </div>
-                )}
+                )} */}
               </div>
 
               {/* Features - Grow to fill space */}
@@ -312,8 +314,12 @@ const Pricing = () => {
               {/* CTA Button - Always at bottom */}
               <button
                 onClick={() => handleSelectPlan(plan)}
-                className="w-full py-3 rounded-xl font-semibold transition-all transform hover:scale-105 text-white flex-shrink-0 hover:opacity-90"
-                style={{ backgroundColor: plan.buttonColor || '#10b981' }}
+                className="w-full py-3 rounded-xl font-semibold transition-all transform hover:scale-105 text-white bg-gray-300 flex-shrink-0 hover:opacity-90 shadow-lg"
+                style={{
+  background: plan.buttonColor
+    ? plan.buttonColor
+    : "linear-gradient(90deg,#7c3aed,#9333ea)"
+}}
               >
                 {Number.parseFloat(plan.monthlyPrice) === 0
                   ? t("Landing.pricingSec.planCTA.freeButton")
