@@ -314,7 +314,7 @@ const Pricing = () => {
               {/* CTA Button - Always at bottom */}
               <button
                 onClick={() => handleSelectPlan(plan)}
-                className="w-full py-3 rounded-xl font-semibold transition-all transform hover:scale-105 text-white bg-gray-300 flex-shrink-0 hover:opacity-90 shadow-lg"
+                className="w-full py-3 rounded-xl font-semibold transition-all transform hover:scale-105 text-white bg-blue-500 flex-shrink-0 hover:opacity-90 shadow-lg"
                 style={{
   background: plan.buttonColor
     ? plan.buttonColor
