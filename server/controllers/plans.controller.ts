@@ -93,7 +93,7 @@ export const createPlan = async (req: Request, res: Response) => {
 
 export const updatePlan = async (req: Request, res: Response) => {
   try {
-    const { id } = req.params;
+    const id = Number(req.params.id);
 
     const {
       name,
@@ -128,6 +128,13 @@ export const updatePlan = async (req: Request, res: Response) => {
       .where(eq(plans.id, id))
       .returning();
 
+    if (!updatedPlan.length) {
+      return res.status(404).json({
+        success: false,
+        message: "Plan not found",
+      });
+    }
+
     res.status(200).json({
       success: true,
       data: updatedPlan[0],
@@ -139,10 +146,10 @@ export const updatePlan = async (req: Request, res: Response) => {
     res.status(500).json({
       success: false,
       message: "Error updating plan",
-      error,
     });
   }
 };
+
 
 export const deletePlan = async (req: Request, res: Response) => {
   try {

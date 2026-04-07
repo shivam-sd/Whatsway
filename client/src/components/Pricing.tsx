@@ -192,13 +192,12 @@ const Pricing = () => {
           const isPopular = plan.popular;
 
           return (
-            <div
-              key={plan.id}
-              className={`bg-white p-8 rounded-2xl shadow-lg border-2 ${
-                isPopular ? "relative transform scale-105" : ""
-              } hover:shadow-xl transition-all flex flex-col h-full`}
-              style={{ borderColor: plan.color || '#e5e7eb' }}
-            >
+           <div
+  key={plan.id}
+  className={`bg-white p-8 rounded-2xl shadow-lg ${
+    plan.name === "Professional" ? "border-2 border-blue-500 relative transform scale-105" : "border"
+  } hover:shadow-xl transition-all flex flex-col h-full`}
+>
               {/* Popular Badge */}
               {plan.badge && (
                 <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
