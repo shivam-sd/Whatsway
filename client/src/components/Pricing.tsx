@@ -225,20 +225,19 @@ const Pricing = () => {
                 </p>
 
                 {/* Price */}
-                <div className="flex items-baseline justify-center mb-2">
+                <div className="flex flex-col items-center justify-center mb-2">
                  <span className="text-4xl font-bold text-gray-900">
   {(isAnnual ? plan.annualPrice : plan.monthlyPrice) === "Custom"
     ? "Custom"
     : `${activeCurrencySymbol}${isAnnual ? plan.annualPrice : plan.monthlyPrice}`}
 </span>
-                 {(isAnnual ? plan.annualPrice : plan.monthlyPrice) !== "Custom" && (isAnnual ? plan.annualPrice : plan.monthlyPrice) !== "0" && (
-  <span className="text-gray-600 ml-2">
-    /
-    {isAnnual
-      ? `${t("Landing.pricingSec.pricing.year")}+taxes`
-      : `${t("Landing.pricingSec.pricing.month")}+taxes`}
-  </span>
-)}
+     <div className="text-gray-600 text-sm mt-1">
+  {plan.monthlyPrice === "0"
+    ? "forever"
+    : plan.monthlyPrice === "Custom"
+    ? "talk to our team"
+    : "per month + taxes"}
+</div>
                 </div>
 
                 {/* Permissions */}
@@ -312,8 +311,15 @@ const Pricing = () => {
                 )}
               </ul>
 
+              <div className="text-xs text-black text-center mb-3">
+  {plan.name === "Free" && <p className="bg-gray-300 text-black p-2 rounded-md">"Try before you buy"</p>}
+  {plan.name === "Starter" && <div className="flex gap-10"><p className="bg-gray-300 p-2 rounded-sm">Small businesses</p> <p className="bg-green-400 flex items-center p-1 px-3 rounded-sm">5 agents</p></div>}
+  {plan.name === "Professional" && <div className="flex gap-10"><p className="bg-blue-400 p-2 rounded-sm text-white">Growing teams </p> <p className="bg-gray-300 flex items-center p-1 px-3 rounded-sm">Unlimited agents</p></div>}
+  {plan.name === "Enterprise" && <p className="bg-gray-300 text-black p-2 rounded-md">Large enterprises</p>}
+</div>
+
               {/* CTA Button - Always at bottom */}
-              <button
+              {/* <button
                 onClick={() => handleSelectPlan(plan)}
                 className="w-full py-3 rounded-xl font-semibold transition-all transform hover:scale-105 text-white bg-blue-500 flex-shrink-0 hover:opacity-90 shadow-lg"
                 style={{
@@ -327,7 +333,7 @@ const Pricing = () => {
   : Number.parseFloat(plan.monthlyPrice) === 0
   ? t("Landing.pricingSec.planCTA.freeButton")
   : t("Landing.pricingSec.planCTA.paidButton")}
-              </button>
+              </button> */}
             </div>
           );
         })}
