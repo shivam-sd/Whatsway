@@ -226,10 +226,11 @@ const Pricing = () => {
 
                 {/* Price */}
                 <div className="flex items-baseline justify-center mb-2">
-                  <span className="text-4xl font-bold text-gray-900">
-                    {activeCurrencySymbol}
-                    {isAnnual ? plan.annualPrice : plan.monthlyPrice}
-                  </span>
+                 <span className="text-4xl font-bold text-gray-900">
+  {(isAnnual ? plan.annualPrice : plan.monthlyPrice) === "Custom"
+    ? "Custom"
+    : `${activeCurrencySymbol}${isAnnual ? plan.annualPrice : plan.monthlyPrice}`}
+</span>
                  {(isAnnual ? plan.annualPrice : plan.monthlyPrice) !== "Custom" && (isAnnual ? plan.annualPrice : plan.monthlyPrice) !== "0" && (
   <span className="text-gray-600 ml-2">
     /
@@ -321,9 +322,11 @@ const Pricing = () => {
     : "linear-gradient(90deg,#7c3aed,#9333ea)"
 }}
               >
-                {Number.parseFloat(plan.monthlyPrice) === 0
-                  ? t("Landing.pricingSec.planCTA.freeButton")
-                  : t("Landing.pricingSec.planCTA.paidButton")}
+             {plan.monthlyPrice === "Custom"
+  ? "Talk to our Support"
+  : Number.parseFloat(plan.monthlyPrice) === 0
+  ? t("Landing.pricingSec.planCTA.freeButton")
+  : t("Landing.pricingSec.planCTA.paidButton")}
               </button>
             </div>
           );
