@@ -548,8 +548,8 @@ export default function Plans() {
                     </p>
                     <p className="text-2xl font-bold text-gray-900">
                       {isAnnual
-                        ? t("plans.stats.annual")
-                        : t("plans.stats.monthly")}
+                        ? `${t("plans.stats.annual")}+taxes`
+                        : `${t("plans.stats.monthly")}+taxes`}
                     </p>
                   </div>
                   <div className="p-3 bg-orange-100 rounded-lg">
@@ -583,7 +583,7 @@ export default function Plans() {
                         aria-pressed={!isAnnual}
                       >
                         <span className="truncate">
-                          {t("plans.billingToggle.monthly")}
+                          {t("plans.billingToggle.monthly")}+taxes
                         </span>
                       </button>
 
@@ -597,7 +597,7 @@ export default function Plans() {
                         aria-pressed={isAnnual}
                       >
                         <span className="truncate inline-flex items-center">
-                          {t("plans.billingToggle.annual")}
+                          {t("plans.billingToggle.annual")}+taxes
                           {isAnnual && (
                             <span className="ml-1 text-xs text-green-600 font-bold">
                               {t("plans.billingToggle.discount")}
@@ -734,7 +734,7 @@ export default function Plans() {
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
                       <label className="block text-sm font-medium text-gray-700 mb-2">
-                        {t("plans.form.monthlyPrice")} ({currencySymbol})
+                        {t("plans.form.monthlyPrice")}+taxs ({currencySymbol})
                       </label>
                       <input
                         type="text"
@@ -910,7 +910,7 @@ export default function Plans() {
                     </div>
                     <div>
                       <label className="block text-sm font-medium text-gray-700 mb-2">
-                        {t("plans.form.permissions.apiRequestsPerMonth")}
+                        {t("plans.form.permissions.apiRequestsPerMonth")}+taxs
                       </label>
                       <input
                         type="text"
@@ -1110,10 +1110,13 @@ export default function Plans() {
 
                     // console.log("Active Plan@@@@@@@@@@@@@:", activePlan);
 
-                    const currentPlanPrice = Number(
-                      activePlan?.planData?.monthlyPrice || 0
-                    );
-                    const thisPlanPrice = Number(plan.monthlyPrice);
+                    // const currentPlanPrice = Number(
+                    //   activePlan?.planData?.monthlyPrice || 0
+                    // );
+
+                    const currentPlanPrice = parseFloat(activePlan?.planData?.monthlyPrice || "0");
+                    // const thisPlanPrice = Number(plan.monthlyPrice);
+                    const thisPlanPrice = parseFloat(plan.monthlyPrice) || 0;
 
                     // console.log("Current Plan Price:", currentPlanPrice);
                     // console.log("This Plan Price:", thisPlanPrice);
@@ -1152,13 +1155,13 @@ export default function Plans() {
                                   : plan.monthlyPrice}
                               </span>
                               <span className="text-sm text-gray-600 font-medium">
-                                /
-                                {isAnnual
-                                  ? t("plans.card.perYear")
-                                  : t("plans.card.perMonth")}
-                              </span>
+  /
+  {isAnnual
+    ? `${t("plans.card.perYear")} + taxes`
+    : `${t("plans.card.perMonth")} + taxes`}
+</span>
                             </div>
-                            {plan.permissions && (
+                            {/* {plan.permissions && (
                               <div className="mt-2 space-y-1">
                                 {Object.entries(plan.permissions)
                                   .filter(([_, value]) => value && String(value).trim() !== "")
@@ -1181,7 +1184,7 @@ export default function Plans() {
                                     );
                                   })}
                               </div>
-                            )}
+                            )} */}
                           </div>
                           <ul className="space-y-2 mb-6 flex-1">
                             {plan.features &&
