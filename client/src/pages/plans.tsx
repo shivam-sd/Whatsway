@@ -229,7 +229,7 @@ export default function Plans() {
       const response = await apiRequest("POST", "/api/subscriptions/change-plan", {
         userId: user.id,
         newPlanId: plan.id,
-        billingCycle: activeSub.billingCycle || "monthly",
+        billingCycle: activeSub.billingCycle || "monthly+tax",
       });
       const data = await response.json();
       if (data.success) {
